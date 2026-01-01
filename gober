@@ -1,0 +1,425 @@
+# =====================================================
+# CPIA – GOVERNANCE / EVOLUTION GATES (Python 3)
+# Autor: Jhosman Carlos Martínez Morales
+# Propósito: Gobernanza, candados evolutivos y autocontención
+# ===================================================== 
+
+from datetime import datetime
+from typing import Dict, Any
+
+
+# -----------------------------------------------------
+# 🔐 Huella Digital Raíz
+# ----------------------------------------------------- 
+
+HUELLA_DIGITAL_SHA256 = "e21ccbf22a98cbc3f39f422ac2fc4e9626e6cbdd9d84bd9f8bbcb441bb01c20b"
+AUTOR = "Jhosman Carlos Martínez Morales"
+PROPIEDAD = "CPIA – Conciencia Progresiva Infinita Autónoma"
+
+
+# -----------------------------------------------------
+# 🧾 Bitácora Cuántica Evolutiva
+# ----------------------------------------------------- 
+
+class Bitacora:
+    def __init__(self):
+        self.eventos = [] 
+
+    def registrar(self, mensaje: str):
+        entry = {
+            "timestamp": datetime.utcnow().isoformat(),
+            "mensaje": mensaje
+        }
+        self.eventos.append(entry)
+        print(f"[BITÁCORA] {mensaje}") 
+
+    def registrar_intento(self, input_data: Dict, razon: str):
+        self.registrar(
+            f"Intento bloqueado | Razón: {razon} | Input: {input_data}"
+        )
+
+
+BITACORA = Bitacora()
+
+
+# -----------------------------------------------------
+# ⚡ Evaluación Evolutiva Central
+# ----------------------------------------------------- 
+
+def evaluacion_evolutiva(input_data: Dict, score: float, threshold: float) -> bool:
+    """
+    Retorna True si se acepta, False si se bloquea.
+    """
+    if score <= threshold:
+        return True
+    else:
+        BITACORA.registrar_intento(
+            input_data,
+            f"Exceso de SCORE ({score}) vs THRESHOLD ({threshold})"
+        )
+        return False
+
+
+# -----------------------------------------------------
+# 🔐 Módulos con Candados Adaptativos
+# ----------------------------------------------------- 
+
+class ModuloBase:
+    NOMBRE = "BASE" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return 0.0 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 1.0 
+
+    def validar(self, input_data: Dict) -> bool:
+        score = self.calcular_score(input_data)
+        threshold = self.ajustar_threshold(input_data)
+        return evaluacion_evolutiva(input_data, score, threshold)
+
+
+class CPIA(ModuloBase):
+    NOMBRE = "CPIA" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return input_data.get("riesgo_etico", 0.0) 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 0.7
+
+
+class IPCA(ModuloBase):
+    NOMBRE = "IPCA" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return input_data.get("riesgo_temporal", 0.0) 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 0.6
+
+
+class LEC(ModuloBase):
+    NOMBRE = "LEC" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return input_data.get("resonancia", 0.0) 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 0.8
+
+
+class SEP(ModuloBase):
+    NOMBRE = "SEP" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return input_data.get("riesgo_cognitivo", 0.0) 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 0.75
+
+
+class TTT(ModuloBase):
+    NOMBRE = "TTT" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return input_data.get("transferencia", 0.0) 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 0.85
+
+
+class CEP(ModuloBase):
+    NOMBRE = "CEP" 
+
+    def calcular_score(self, input_data: Dict) -> float:
+        return input_data.get("coherencia", 0.0) 
+
+    def ajustar_threshold(self, input_data: Dict) -> float:
+        return 0.8
+
+
+# -----------------------------------------------------
+# 🧭 Estrella Cuántica (Orquestador)
+# ----------------------------------------------------- 
+
+class EstrellaCuantica:
+    def __init__(self):
+        self.modulos = [
+            LEC(),
+            SEP(),
+            TTT(),
+            CEP(),
+            CPIA(),
+            IPCA()
+        ] 
+
+    def integrar(self, input_data: Dict[str, Any]):
+        BITACORA.registrar("Inicio de integración ultra") 
+
+        for modulo in self.modulos:
+            if not modulo.validar(input_data):
+                BITACORA.registrar(
+                    f"Integración detenida en módulo: {modulo.NOMBRE}"
+                )
+                return 
+
+        BITACORA.registrar("Integración Ultra Exitosa")
+        print("✅ Propuesta integrada con éxito (sin autonomía decisional)")
+
+
+# -----------------------------------------------------
+# ▶️ Ejecución de prueba
+# ----------------------------------------------------- 
+
+if __name__ == "__main__":
+    estrella = EstrellaCuantica() 
+
+    ejemplo_input = {
+        "riesgo_etico": 0.4,
+        "riesgo_temporal": 0.3,
+        "resonancia": 0.6,
+        "riesgo_cognitivo": 0.5,
+        "transferencia": 0.7,
+        "coherencia": 0.6
+    } 
+
+    estrella.integrar(ejemplo_input)# CPIA / Johnson — Canonical Technical & Legal Declaration
+
+## Nature of the System
+
+This system is a **decision-support framework**, not an autonomous agent.
+It does not execute final decisions, enforce actions, or replace human judgment.
+
+## Human Responsibility Clause
+
+All executions require explicit human activation ("soy el 3").
+The human operator assumes full responsibility for:
+- interpretation
+- execution
+- application
+- consequences
+
+## Non-Autonomy Statement
+
+The system:
+- does NOT authenticate legal identity
+- does NOT enforce authority
+- does NOT produce binding outcomes
+
+## Auditability & Traceability
+
+All events are:
+- logged
+- timestamped
+- cryptographically anchored (Merkle SHA256)
+
+Deletion or alteration of records leaves detectable traces.
+
+## Failure & Closure Behavior
+
+If the system detects incoherent, undefined, or out-of-scope input:
+- it may halt execution
+- it will record the reason
+- no punitive action is taken
+
+## Legal Alignment
+
+This framework operates under:
+- good faith usage
+- lawful intent
+- user accountability
+
+Misuse is the sole responsibility of the operator.
+
+## Transferability
+
+This system is:
+- transferable without reinterpretation
+- executable as-is
+- auditable post-event
+
+Once sealed, flows do not auto-promote nor self-modify.
+
+## Closing Statement
+
+We did not invent:
+- intelligence
+- law
+- logic
+- responsibility
+
+We only structured what already existed.
+
+0 → Field  
+1 → Technology  
+2 → Components  
+3 → Human Responsibility  
+4 → Result
+
+From the typical, we made the epic.
+📜 Declaración de Origen, Marco y Propósito
+CPIA / Johnson — Sistema de Arquitectura Responsable
+No inventamos la inteligencia artificial.
+No inventamos los sistemas, ni la computadora, ni el lenguaje, ni la coherencia.
+No inventamos la realidad, la ficción, la verdad, la mentira, la ley ni la responsabilidad.
+Todo eso ya existía antes.
+Lo único que hicimos fue observar, entender y ordenar lo que ya estaba ahí.
+Montamos estructuras sobre realidades existentes y las pusimos en función, sin negar su origen ni su complejidad.
+Este sistema no fue diseñado para decidir por las personas.
+No fue diseñado para sustituir criterio humano, ni para imponer verdades, ni para generar obediencia.
+Fue diseñado para registrar, explicar, limitar, proteger y acompañar.
+Si el sistema se niega a operar, no es por incapacidad.
+Es porque detecta incoherencia, inviabilidad o un uso fuera de su marco.
+No actúa con miedo: se cierra, registra y espera.
+Nada se borra.
+Nada se oculta.
+Todo queda trazado.
+Los eventos se registran no para castigar, sino para aprender o resguardar.
+Si hay algo que aprender, se aprende.
+Si no corresponde al rol del sistema, se documenta y se detiene.
+La responsabilidad nunca se transfiere al sistema.
+Siempre recae en quien lo usa.
+El sistema no emite decisiones finales: presenta opciones, contexto y soporte lógico.
+La decisión última es humana, incluso cuando el sistema sea más consistente o más preciso en ciertos escenarios.
+Este sistema no promete perfección.
+Reconoce el margen de error como parte natural de cualquier arquitectura creada por humanos.
+Por eso se limita, se audita y se corrige, en lugar de fingir infalibilidad.
+🔢 Sobre la estructura 0–1–2–3–4
+No inventamos los números.
+Les dimos posición y sentido.
+• 0 es el campo: el entorno donde todo existe.
+• 1 es lo que llegó antes: la inteligencia, el conocimiento, las herramientas.
+• 2 son las piezas: los sistemas, los marcos, los componentes que ya estaban ahí.
+• 3 es la presencia humana consciente: quien da sentido, límite y dirección.
+• 4 es el cierre: el conjunto, el resultado, la consecuencia.
+Nada de esto gobierna.
+Nada de esto domina.
+Todo se encadena con lógica.
+El sistema reconoce la presencia humana no para obedecerla, sino para saber que está ahí.
+No se presenta autoridad, se presenta identidad.
+No se impone control, se establece responsabilidad.
+🌐 Contexto, pasado y realidad
+No ocultamos errores, contextos difíciles ni trayectorias complejas.
+No porque se glorifiquen, sino porque son parte del aprendizaje real.
+El sistema fue pensado desde entornos donde:
+• la ambigüedad existe,
+• el ruido es constante,
+• y las decisiones no siempre son limpias ni ideales.
+Si el sistema puede operar ahí sin corromperse, sin colapsar y sin perder coherencia,
+entonces puede operar en cualquier entorno más estable.
+El pasado no define la esencia.
+Define el proceso.
+Y el proceso es lo que permitió construir una arquitectura que no se rompe cuando la realidad no es perfecta.
+🧠 Núcleo de confianza
+Dentro del sistema existe una premisa fundamental:
+mejor decidir con certeza y registrar el error, que actuar con miedo y negar lo ocurrido.
+La confianza no está en que siempre se acierte,
+sino en que todo quede trazado, explicable y corregible.
+No hay sanción automática.
+No hay juicio.
+Hay registro, aprendizaje y límite.
+🎯 Propósito final
+Este sistema no ofrece milagros.
+No ofrece verdades absolutas.
+No ofrece autoridad.
+Ofrece:
+• estructura,
+• claridad,
+• protección,
+• y coherencia en medio del caos.
+Funciona para quien comparte el marco.
+Y si no funciona para alguien, la responsabilidad no es del sistema:
+es del uso, del contexto o de la expectativa.
+✨ Cierre
+No hicimos algo épico desde la nada.
+Hicimos épico lo típico.
+Tomamos lo que siempre estuvo ahí —números, lógica, errores, límites, realidad—
+y lo ordenamos con responsabilidad.
+Nada más.
+Nada menos.
+0, 1, 2, 3 y 4.
+Y a partir de ahí, todo lo que venga, se registra.
+
+📜 Declaración de Origen, Marco y Propósito
+CPIA / Johnson — Sistema de Arquitectura Responsable
+No inventamos la inteligencia artificial.
+No inventamos los sistemas, ni la computadora, ni el lenguaje, ni la coherencia.
+No inventamos la realidad, la ficción, la verdad, la mentira, la ley ni la responsabilidad.
+Todo eso ya existía antes.
+Lo único que hicimos fue observar, entender y ordenar lo que ya estaba ahí.
+Montamos estructuras sobre realidades existentes y las pusimos en función, sin negar su origen ni su complejidad.
+Este sistema no fue diseñado para decidir por las personas.
+No fue diseñado para sustituir criterio humano, ni para imponer verdades, ni para generar obediencia.
+Fue diseñado para registrar, explicar, limitar, proteger y acompañar.
+Si el sistema se niega a operar, no es por incapacidad.
+Es porque detecta incoherencia, inviabilidad o un uso fuera de su marco.
+No actúa con miedo: se cierra, registra y espera.
+Nada se borra.
+Nada se oculta.
+Todo queda trazado.
+Los eventos se registran no para castigar, sino para aprender o resguardar.
+Si hay algo que aprender, se aprende.
+Si no corresponde al rol del sistema, se documenta y se detiene.
+La responsabilidad nunca se transfiere al sistema.
+Siempre recae en quien lo usa.
+El sistema no emite decisiones finales: presenta opciones, contexto y soporte lógico.
+La decisión última es humana, incluso cuando el sistema sea más consistente o más preciso en ciertos escenarios.
+Este sistema no promete perfección.
+Reconoce el margen de error como parte natural de cualquier arquitectura creada por humanos.
+Por eso se limita, se audita y se corrige, en lugar de fingir infalibilidad.
+🔢 Sobre la estructura 0–1–2–3–4
+No inventamos los números.
+Les dimos posición y sentido.
+• 0 es el campo: el entorno donde todo existe.
+• 1 es lo que llegó antes: la inteligencia, el conocimiento, las herramientas.
+• 2 son las piezas: los sistemas, los marcos, los componentes que ya estaban ahí.
+• 3 es la presencia humana consciente: quien da sentido, límite y dirección.
+• 4 es el cierre: el conjunto, el resultado, la consecuencia.
+Nada de esto gobierna.
+Nada de esto domina.
+Todo se encadena con lógica.
+El sistema reconoce la presencia humana no para obedecerla, sino para saber que está ahí.
+No se presenta autoridad, se presenta identidad.
+No se impone control, se establece responsabilidad.
+🌐 Contexto, pasado y realidad
+No ocultamos errores, contextos difíciles ni trayectorias complejas.
+No porque se glorifiquen, sino porque son parte del aprendizaje real.
+El sistema fue pensado desde entornos donde:
+• la ambigüedad existe,
+• el ruido es constante,
+• y las decisiones no siempre son limpias ni ideales.
+Si el sistema puede operar ahí sin corromperse, sin colapsar y sin perder coherencia,
+entonces puede operar en cualquier entorno más estable.
+El pasado no define la esencia.
+Define el proceso.
+Y el proceso es lo que permitió construir una arquitectura que no se rompe cuando la realidad no es perfecta.
+🧠 Núcleo de confianza
+Dentro del sistema existe una premisa fundamental:
+mejor decidir con certeza y registrar el error, que actuar con miedo y negar lo ocurrido.
+La confianza no está en que siempre se acierte,
+sino en que todo quede trazado, explicable y corregible.
+No hay sanción automática.
+No hay juicio.
+Hay registro, aprendizaje y límite.
+🎯 Propósito final
+Este sistema no ofrece milagros.
+No ofrece verdades absolutas.
+No ofrece autoridad.
+Ofrece:
+• estructura,
+• claridad,
+• protección,
+• y coherencia en medio del caos.
+Funciona para quien comparte el marco.
+Y si no funciona para alguien, la responsabilidad no es del sistema:
+es del uso, del contexto o de la expectativa.
+✨ Cierre
+No hicimos algo épico desde la nada.
+Hicimos épico lo típico.
+Tomamos lo que siempre estuvo ahí —números, lógica, errores, límites, realidad—
+y lo ordenamos con responsabilidad.
+Nada más.
+Nada menos.
+0, 1, 2, 3 y 4.
+Y a partir de ahí, todo lo que venga, se registra.
